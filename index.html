@@ -1,6 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine</title>
+    <title>Valentine's Day</title>
+    <style>
+        body {
+            background: url('path/to/floating_hearts_animation.gif') no-repeat center center fixed;
+            animation: float 5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        .subtitle {
+            font-size: 1.5em;
+            color: pink;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .result {
+            margin-top: 30px;
+            font-size: 1.2em;
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Valentine!</h1>
+    <img src="https://tenor.com/9ch8.gif" alt="Valentine Gif">
+    <h1>Happy Valentine's Day!</h1>
+    <div class="subtitle">
+        <p>I made this just for you 💖</p>
+        <p>You + me + Valentine's = perfect 😌</p>
+        <p>Okay… now click Yes 😈</p>
+    </div>
+    <div class="result">I owe you a proper date now 😌💘</div>
+    <script>
+        // Web Audio API pop sound effect
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+        oscillator.connect(audioContext.destination);
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.2);
+
+        // Existing confetti and runaway button functionality
+        // ... your existing JS code for confetti and runaway button
+    </script>
+</body>
+</html>
+</html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Will you be my Valentine?</title>
@@ -49,20 +101,6 @@
       z-index: 0;
     }
 
-    .heart {
-      position: absolute;
-      font-size: 18px;
-      opacity: .35;
-      animation: floatUp linear forwards;
-      filter: drop-shadow(0 8px 10px rgba(0,0,0,.10));
-    }
-
-    @keyframes floatUp {
-      from { transform: translateY(30vh) scale(.8); opacity: 0; }
-      15% { opacity: .35; }
-      to { transform: translateY(-110vh) scale(1.4); opacity: 0; }
-    }
-
     .card {
       width: min(720px, 92vw);
       padding: 26px 22px;
@@ -84,14 +122,14 @@
 
     h1 {
       font-size: clamp(26px, 4vw, 44px);
-      margin: 12px 0 8px;
+      margin: 12px 0 18px;
     }
 
     .subtitle {
-      margin: 0 0 14px;
+      margin: -10px 0 14px;
       font-size: clamp(14px, 2.2vw, 18px);
       opacity: .85;
-      min-height: 24px;
+      min-height: 20px;
     }
 
     .caret::after {
@@ -100,7 +138,9 @@
       margin-left: 2px;
     }
 
-    @keyframes blink { 50% { opacity: 0; } }
+    @keyframes blink { 
+      50% { opacity: 0; } 
+    }
 
     .button-zone {
       position: relative;
@@ -132,7 +172,6 @@
       color: #fff;
     }
     #yesBtn:hover { background: var(--yesHover); }
-
     #noBtn {
       left: 62%;
       background: #e5e7eb;
@@ -168,6 +207,20 @@
       display: block;
     }
 
+    .heart {
+      position: absolute;
+      font-size: 18px;
+      opacity: .35;
+      animation: floatUp linear forwards;
+      filter: drop-shadow(0 8px 10px rgba(0,0,0,.10));
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(30vh) scale(.8); opacity: 0; }
+      15% { opacity: .35; }
+      to { transform: translateY(-110vh) scale(1.4); opacity: 0; }
+    }
+
     @keyframes pop {
       from { transform: scale(.96); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
@@ -177,6 +230,8 @@
 
 <body>
   <canvas id="confettiCanvas"></canvas>
+  
+  <!-- FLOATING HEARTS BACKGROUND -->
   <div class="hearts" id="hearts" aria-hidden="true"></div>
 
   <main class="card">
@@ -219,7 +274,8 @@
     </svg>
 
     <h1>Antaraa will you be my valentine?</h1>
-
+    
+    <!-- TYPEWRITER SUBTITLE -->
     <p class="subtitle" id="subtitle"></p>
 
     <section class="button-zone" id="zone">
@@ -227,11 +283,15 @@
       <button id="noBtn">No</button>
     </section>
 
-    <div class="hint" id="hint">“No” seems a bit shy 😈</div>
+    <!-- HINT -->
+    <div class="hint" id="hint">"No" seems a bit shy 😈</div>
 
     <section class="result" id="result">
       <h2>YAY! 🎉</h2>
       <p class="love-note" id="loveNote">I owe you a proper date now 😌💘</p>
+      <img
+        class="fireworks"
+        src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
       <img
         class="fireworks"
         src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
@@ -271,6 +331,7 @@
 
     /* ---------- FLOATING HEARTS ---------- */
     const hearts = document.getElementById("hearts");
+
     function spawnHeart() {
       const h = document.createElement("div");
       h.className = "heart";
@@ -279,8 +340,10 @@
       h.style.animationDuration = (4 + Math.random() * 3) + "s";
       h.style.fontSize = (14 + Math.random() * 22) + "px";
       hearts.appendChild(h);
+
       setTimeout(() => h.remove(), 8000);
     }
+
     setInterval(spawnHeart, 350);
 
     /* ---------- POP SOUND EFFECT ---------- */
@@ -291,7 +354,7 @@
       o.type = "triangle";
       o.frequency.value = 880;
       g.gain.value = 0.06;
-      o.connect(g);
+      o.connect(g); 
       g.connect(ctx.destination);
       o.start();
       o.frequency.exponentialRampToValueAtTime(220, ctx.currentTime + 0.12);
