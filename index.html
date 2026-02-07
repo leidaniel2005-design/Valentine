@@ -3,50 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine’s Day!</title>
+    <title>Valentine's Day</title>
     <style>
         body {
-            background-color: #ffcccb;
+            background-color: pink;
+            overflow: hidden;
+            position: relative;
             text-align: center;
-            font-family: 'Arial', sans-serif;
         }
-        #typewriter {
-            font-size: 2em;
-            border-right: 2px solid;
+        h1 {
+            font-size: 4em;
+            animation: typing 2s steps(22, end);
             white-space: nowrap;
             overflow: hidden;
-            width: 0;
-            animation: typing 4s steps(30, end), blink 0.75s step-end infinite;
+            border-right: 4px solid;
         }
         @keyframes typing {
+            from { width: 0; }
             to { width: 100%; }
         }
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-        .floating-heart {
+        .heart {
             position: absolute;
-            width: 50px;
-            bottom: -50px;
-            animation: floating 10s infinite;
+            background: red;
+            width: 20px;
+            height: 20px;
+            box-shadow: 0 8px 6px -6px black;
+            border-radius: 50%;
         }
-        @keyframes floating {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); } 
-            100% { transform: translateY(0); }
-        }
+        /* Add your confetti and heart animations here */
     </style>
+</head>
+<body>
+    <h1>Happy Valentine's Day!</h1>
+    <p>Click the buttons below:</p>
+    <button id="yes" style="font-size: 2em;">Yes</button>
+    <button id="no" style="font-size: 2em;">No</button>
+
     <script>
-        function playSound() {
-            var audio = new Audio('pop-sound.mp3');
+        document.getElementById("yes").addEventListener("click", playFireworks);
+        document.getElementById("no").addEventListener("click", function() {
+            alert("Oh no! 😢");
+        });
+
+        function playFireworks() {
+            // Your code to play fireworks
+            alert("Yay! 🎉");
+            // Play sound effect
+            let audio = new Audio('pop.mp3'); // Make sure to add pop sound file
             audio.play();
         }
+        
+        // Implement floating hearts logic
     </script>
-</head>
-<body onload="playSound()">
-    <h1>Happy Valentine’s Day!</h1>
-    <div id="typewriter">Love is in the air!</div>
-    <img src="fireworks.gif" alt="Fireworks" />
-    <img class="floating-heart" src="heart.png" alt="heart" />
 </body>
 </html>
